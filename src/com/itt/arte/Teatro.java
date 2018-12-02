@@ -16,11 +16,10 @@ public class Teatro extends Local implements Sala {
 
     @Override
     public String verProgramacion() {
-        String cartel = "Hoy presentamos " + this.getObra().getTitulo()
-                + ", género: " + this.getObra().getGenero()
-                + ", duración: " + this.getObra().getMinutosDuracion()
+        String cartel = "Hoy presentamos: " 
+                + "\n"+ this.getObra().toString()
                 + "\nEn " + this.toString()
-                + "\nPrecio: " + this.getPrecio();
+                + ",\nPrecio: " + this.getPrecio();
         return cartel;
     }
 

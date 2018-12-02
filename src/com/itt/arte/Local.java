@@ -16,7 +16,7 @@ public abstract class Local {
     public String toString(){
         return  this.getDomicilio() + ", local de "
                 + this.getMetros() + " metros, con "
-                + this.getAccesos() + " accesos ";
+                + this.getAccesos() + " accesos";
     }
 
     /**

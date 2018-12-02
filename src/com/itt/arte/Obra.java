@@ -14,7 +14,9 @@ public class Obra {
     
     @Override
     public String toString(){
-        return "";
+        return  this.getTitulo() 
+                + ",\ngénero: " + this.getGenero() 
+                + ",\nduración: " + this.getMinutosDuracion() + " minutos";
     }
     
     //  Getters & Setters
