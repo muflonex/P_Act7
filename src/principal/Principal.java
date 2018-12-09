@@ -30,25 +30,25 @@ public class Principal {
             switch (opc) {
                 case '1':
                     escr("");
-                    escr(teatro.verProgramacion());
+                    escr(getTeatro().verProgramacion());
                     escr("");
                     break;
                 case '2':
                     escr("");
                     //  Mostramos el estado de todas las butacas
-                    escr(teatro.verLocalidades());
+                    escr(getTeatro().verLocalidades());
                     escr("");
                     break;
                 case '3':
                     escr("");
                     //  Mostramos quién ocupa las butacas
-                    escr(teatro.verLocalidadesOcupadas());
+                    escr(getTeatro().verLocalidadesOcupadas());
                     escr("");
                     break;
                 case '4':
                     escr("");
                     //  Vendemos una entrada
-                    pasarelaDeVenta();
+                    pasarelaDeVenta(getTeatro());
                     escr("");
                 case '5':
 
@@ -91,21 +91,9 @@ public class Principal {
 
     }
 
-    public static void pasarelaDeVenta() {
-        //  guardamos las respuestas como una variable local para poder referenciarlos
-        String[] respuestas = hacerPreguntas(teatro);
-        //  damos nombres a las respuestas para que sea más legible la realización 
-        //  del método venderLocalidad
-        int fila = Integer.parseInt(respuestas[0]);
-        int butaca = Integer.parseInt(respuestas[1]);
-
-        escr(teatro.venderLocalidad(fila, butaca, crearEspectador(respuestas)));
-    }
-
-    public static String[] hacerPreguntas(Teatro sitio) {
+    public static void pasarelaDeVenta(Teatro sitio) {
         String cantidadFilas = String.valueOf(sitio.getLocalidades().length);
         String cantidadButacas = String.valueOf(sitio.getLocalidades()[0].length);
-
         //  Creamos el array que contiene preguntas y máximos para las respuestas
         String[][] preguntas = {
             {"¿En que fila quiere sentarse?", cantidadFilas},
@@ -114,6 +102,17 @@ public class Principal {
             {"¿Cómo se llama?"},
             {"¿Su teléfono?"}
         };
+        //  guardamos las respuestas como una variable local para poder referenciarlos
+        String[] respuestas = hacerPreguntas(preguntas);
+        //  damos nombres a las respuestas para que sea más legible la realización 
+        //  del método venderLocalidad
+        int fila = Integer.parseInt(respuestas[0]);
+        int butaca = Integer.parseInt(respuestas[1]);
+
+        escr(getTeatro().venderLocalidad(fila, butaca, crearEspectador(respuestas)));
+    }
+
+    public static String[] hacerPreguntas(String[][] preguntas) {
         //  Creamos el array para guardar las respuestas con 
         //  tantos espacios como hubo preguntas
         String resultado[] = new String[preguntas.length];
@@ -184,5 +183,33 @@ public class Principal {
     //  Alias para cortar System.out.println
     public static void escr(String txt) {
         System.out.println(txt);
+    }
+    
+    /**
+     * @return the obra
+     */
+    public static Obra getObra() {
+        return obra;
+    }
+
+    /**
+     * @param aObra the obra to set
+     */
+    public static void setObra(Obra aObra) {
+        obra = aObra;
+    }
+
+    /**
+     * @return the teatro
+     */
+    public static Teatro getTeatro() {
+        return teatro;
+    }
+
+    /**
+     * @param aTeatro the teatro to set
+     */
+    public static void setTeatro(Teatro aTeatro) {
+        teatro = aTeatro;
     }
 }

@@ -63,7 +63,7 @@ public class Teatro extends Local implements Sala {
     
         while(localidades[fila][butaca] != null){
             System.out.println("Butaca ocupada. Vuelve por favor a realizar la compra.");
-            Principal.pasarelaDeVenta();
+            Principal.pasarelaDeVenta(Principal.getTeatro());
         }
         switch(e.rangoEdad()){
             case "INFANTIL" : precio = this.getPrecio()*0.5;
