@@ -82,17 +82,49 @@ public class Teatro extends Local implements Sala {
 
     @Override
     public String cancelarLocalidad(int fila, int butaca) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String nombre = Principal.getTeatro().getLocalidades()[fila][butaca].getNombre();
+        localidades[fila][butaca] = null;
+        return nombre + " ha cancelado su reserva";
     }
 
     @Override
     public String consultarLocalidad(int fila, int butaca) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Espectador cliente = Principal.getTeatro().getLocalidades()[fila][butaca];
+        switch(cliente.rangoEdad()){
+            case "INFANTIL" : precio = this.getPrecio()*0.5;
+                            break;
+            case "MENOR"    : precio = this.getPrecio()*0.8;
+                            break;
+            case "MAYOR"    : precio = this.getPrecio();
+                            break;
+            case "JUBILADO" : precio = this.getPrecio()*0.33;
+                            break;  
+        }
+        return "Localidad ocupada por " + cliente.toString() + " Precio: " + precio;
     }
 
     @Override
     public double calcularRecaudacion() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        double suma = 0;
+        Espectador[][] arrayButacas = this.getLocalidades();
+        for (int y = 0; y < arrayButacas.length; y++) {
+            for (int x = 0; x < arrayButacas[y].length; x++) {
+                if (arrayButacas[y][x] != null) {
+                    switch(arrayButacas[y][x].rangoEdad()){
+                        case "INFANTIL" : precio = this.getPrecio()*0.5;
+                            break;
+                        case "MENOR"    : precio = this.getPrecio()*0.8;
+                            break;
+                        case "MAYOR"    : precio = this.getPrecio();
+                            break;
+                        case "JUBILADO" : precio = this.getPrecio()*0.33;
+                            break;  
+                    }
+                    suma += precio;
+                }
+            }
+        }
+        return suma;
     }
 
     /**

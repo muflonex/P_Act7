@@ -50,16 +50,30 @@ public class Principal {
                     //  Vendemos una entrada
                     pasarelaDeVenta(getTeatro());
                     escr("");
+                    break;
                 case '5':
-
+                    escr("");
+                    //  Cancelamos una entrada
+                    pasarelaDeCancelar(getTeatro());
+                    escr("");
+                    break;
                 case '6':
-
+                    escr("");
+                    //  Consultamos una butaca
+                    pasarelaDeConsulta(getTeatro());
+                    escr("");
+                    break;
                 case '7':
-
+                    escr("");
+                    //  Calculamos la recaudación
+                    escr("Recaudación: " + getTeatro().calcularRecaudacion());
+                    escr("");
+                    break;
                 case '8':
-
-                default:
-
+                    escr("Hasta pronto!");
+                    break;
+                default: escr("Opción inválida");
+                    break;
             }
 
         } while (opc != '8');
@@ -110,6 +124,35 @@ public class Principal {
         int butaca = Integer.parseInt(respuestas[1]);
 
         escr(getTeatro().venderLocalidad(fila, butaca, crearEspectador(respuestas)));
+    }
+    public static void pasarelaDeCancelar(Teatro sitio){
+        String cantidadFilas = String.valueOf(sitio.getLocalidades().length);
+        String cantidadButacas = String.valueOf(sitio.getLocalidades()[0].length);
+        
+        String[][] preguntas = {
+            {"¿Fila?", cantidadFilas},
+            {"¿Butaca?", cantidadButacas},
+        };
+        String[] respuestas = hacerPreguntas(preguntas);
+        int fila = Integer.parseInt(respuestas[0]);
+        int butaca = Integer.parseInt(respuestas[1]);
+        
+        escr(getTeatro().cancelarLocalidad(fila,butaca));
+    }
+    
+    public static void pasarelaDeConsulta(Teatro sitio){
+        String cantidadFilas = String.valueOf(sitio.getLocalidades().length);
+        String cantidadButacas = String.valueOf(sitio.getLocalidades()[0].length);
+        
+        String[][] preguntas = {
+            {"¿Fila?", cantidadFilas},
+            {"¿Butaca?", cantidadButacas},
+        };
+        String[] respuestas = hacerPreguntas(preguntas);
+        int fila = Integer.parseInt(respuestas[0]);
+        int butaca = Integer.parseInt(respuestas[1]);   
+        
+        escr(getTeatro().consultarLocalidad(fila, butaca));
     }
 
     public static String[] hacerPreguntas(String[][] preguntas) {
