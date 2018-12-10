@@ -82,14 +82,20 @@ public class Teatro extends Local implements Sala {
 
     @Override
     public String cancelarLocalidad(int fila, int butaca) {
-        String nombre = Principal.getTeatro().getLocalidades()[fila][butaca].getNombre();
-        localidades[fila][butaca] = null;
-        return nombre + " ha cancelado su reserva";
+        Espectador cliente = Principal.getTeatro().getLocalidades()[fila][butaca];
+        if(cliente != null){
+            String nombre = cliente.getNombre();
+            localidades[fila][butaca] = null;
+            return nombre + " ha cancelado su reserva";
+        } else {
+            return "La butaca indicada no está ocupada";
+        }
     }
 
     @Override
     public String consultarLocalidad(int fila, int butaca) {
         Espectador cliente = Principal.getTeatro().getLocalidades()[fila][butaca];
+        if(cliente != null){
         switch(cliente.rangoEdad()){
             case "INFANTIL" : precio = this.getPrecio()*0.5;
                             break;
@@ -100,7 +106,10 @@ public class Teatro extends Local implements Sala {
             case "JUBILADO" : precio = this.getPrecio()*0.33;
                             break;  
         }
-        return "Localidad ocupada por " + cliente.toString() + " Precio: " + precio;
+        return "Localidad ocupada por " + cliente.toString() + " Precio: " + precio;}
+        else{
+            return "La butaca indicada no está ocupada";
+        }
     }
 
     @Override
